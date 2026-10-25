@@ -1,6 +1,6 @@
 {
   "name": "wiki-plugin-podcast",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Federated Wiki - Podcast plugin: any podcast link in, its open RSS feed out, then a wiki page built from the feed. Private research until cleared.",
   "type": "module",

@@ -43,8 +43,8 @@ const find = async args => {
   const input = text(args.input, 2000, 'The link or title')
   if (!input) throw problem(400, 'Paste a podcast link, or type a title.')
   const title = text(args.title, 200, 'The title') || undefined
-  const [{ find }, { listenNotesKey }] = await Promise.all([core('service.js'), core('keys.js')])
-  const r = await find({ input, title }, { apiKey: await listenNotesKey() })
+  const [{ find }, { key }] = await Promise.all([core('service.js'), core('keys.js')])
+  const r = await find({ input, title }, { apiKey: await key('listennotes') })
   log(`find ${input.slice(0, 80)}: ${r.ok ? r.found.route + ' ' + r.found.feedUrl : r.found.error}`)
   return r
 }
@@ -96,8 +96,8 @@ const search = async args => {
   const q = text(args.q, 200, 'The search')
   if (!q) throw problem(400, 'Type a word or two to search for.')
   const listennotesId = text(args.listennotesId, 64, 'The ListenNotes id') || undefined
-  const [{ search }, { listenNotesKey }] = await Promise.all([core('service.js'), core('keys.js')])
-  const r = await search({ feedUrl, q, listennotesId, limit: args.limit }, { apiKey: await listenNotesKey() })
+  const [{ search }, { key }] = await Promise.all([core('service.js'), core('keys.js')])
+  const r = await search({ feedUrl, q, listennotesId, limit: args.limit }, { apiKey: await key('listennotes') })
   log(`search "${q}" in ${feedUrl}: ${r.hits.length} hits (${r.source})`)
   return r
 }
@@ -106,8 +106,8 @@ const podcasts = async args => {
   pace()
   const q = text(args.q, 200, 'The search')
   if (!q) throw problem(400, 'Type a podcast title or a word or two to search for.')
-  const [{ podcasts }, { listenNotesKey }] = await Promise.all([core('service.js'), core('keys.js')])
-  const r = await podcasts({ q, limit: args.limit }, { apiKey: await listenNotesKey() })
+  const [{ podcasts }, { key }] = await Promise.all([core('service.js'), core('keys.js')])
+  const r = await podcasts({ q, limit: args.limit }, { apiKey: await key('listennotes') })
   log(`podcasts "${q}": ${r.candidates.length} candidates (${r.sources.join(', ')})`)
   return r
 }
