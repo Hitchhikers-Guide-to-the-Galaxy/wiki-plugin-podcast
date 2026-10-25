@@ -1,0 +1,46 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Podcast",
+    "version": "0.1.0",
+    "description": "Podcast links to wiki pages. Find takes any podcast link (a feed, BBC, Apple Podcasts, ListenNotes, a show's website) or a title and finds the podcast's open RSS feed. Page builds a podcast page or an episode page from that feed, for the browser to show as a ghost page to fork. Both reach the public internet and spend the farm's ListenNotes quota, so only the signed-in owner of a private site may call them, and they are never offered to agents."
+  },
+  "paths": {
+    "/find.json": {
+      "post": {
+        "operationId": "find",
+        "summary": "Find a podcast's open feed from a link or a title",
+        "description": "Answers with how the feed was found (route, steps), a summary of the podcast and its 25 newest episodes, and the episode the link named, if any. An ambiguous title answers with candidates.",
+        "x-fedwiki-writes": true,
+        "x-fedwiki-private-only": true,
+        "x-fedwiki-context": [],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": {
+          "type": "object", "required": ["input"],
+          "properties": {
+            "input": { "type": "string", "description": "A podcast or episode link, or a podcast title." },
+            "title": { "type": "string", "description": "Optional title hint, for pages that carry several podcasts." }
+          } } } } },
+        "responses": { "200": { "description": "The finder's result and a podcast summary." } }
+      }
+    },
+    "/page.json": {
+      "post": {
+        "operationId": "page",
+        "summary": "Build a podcast or episode page from a feed",
+        "description": "Answers with page JSON (title, story, journal) built from the feed: the podcast page, or with episode set, that episode's page. Nothing is written to the wiki; the browser shows it as a ghost page.",
+        "x-fedwiki-writes": true,
+        "x-fedwiki-private-only": true,
+        "x-fedwiki-context": [],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": {
+          "type": "object", "required": ["feedUrl"],
+          "properties": {
+            "feedUrl": { "type": "string", "description": "The feed, as find answered it." },
+            "episode": { "type": "string", "description": "An episode key (its guid or audio URL) from find. Omit for the podcast page." },
+            "found": { "type": "object", "description": "Find's facts to record on the page: route, itunesId, listennotesId, movedFrom." },
+            "recent": { "type": "integer", "description": "How many recent episodes the podcast page lists (1-50, default 10)." }
+          } } } } },
+        "responses": { "200": { "description": "Page JSON." } }
+      }
+    }
+  }
+}

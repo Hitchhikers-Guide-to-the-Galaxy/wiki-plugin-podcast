@@ -1,14 +1,16 @@
 {
   "name": "wiki-plugin-podcast",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "description": "Federated Wiki - Podcast plugin: any podcast link in, its open RSS feed out, then a wiki page built from the feed. Private research until cleared.",
   "type": "module",
   "bin": {
-    "find-feed": "bin/find-feed.js"
+    "find-feed": "bin/find-feed.js",
+    "feed-to-page": "bin/feed-to-page.js"
   },
   "scripts": {
-    "test": "node --test test/unit.test.js test/page.test.js",
+    "build": "node scripts/build.js",
+    "test": "node --test test/unit.test.js test/page.test.js test/client.test.js",
     "test:live": "node --test --test-concurrency=1 test/live.test.js"
   },
   "engines": {
@@ -18,5 +20,24 @@
   "license": "MIT",
   "dependencies": {
     "fast-xml-parser": "^5.11.2"
+  },
+  "main": "client/podcast.js",
+  "files": [
+    "client",
+    "pages",
+    "api",
+    "src/core",
+    "bin",
+    "factory.json"
+  ],
+  "fedwiki": {
+    "api": {
+      "version": 1,
+      "spec": "api/openapi.json",
+      "handlers": "api/handlers.js"
+    }
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12"
   }
 }
