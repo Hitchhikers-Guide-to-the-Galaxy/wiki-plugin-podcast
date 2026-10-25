@@ -1,8 +1,7 @@
 {
   "name": "wiki-plugin-podcast",
   "version": "0.4.0",
-  "private": true,
-  "description": "Federated Wiki - Podcast plugin: any podcast link in, its open RSS feed out, then a wiki page built from the feed. Private research until cleared.",
+  "description": "Federated Wiki - Podcast plugin: any podcast link in, its open RSS feed out, then podcast and episode pages built from the feed, kept current, searchable, and the audio you cite archived with its provenance.",
   "type": "module",
   "bin": {
     "find-feed": "bin/find-feed.js",
@@ -39,5 +38,20 @@
   },
   "devDependencies": {
     "esbuild": "^0.25.12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hitchhikers-Guide-to-the-Galaxy/wiki-plugin-podcast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hitchhikers-Guide-to-the-Galaxy/wiki-plugin-podcast/issues"
+  },
+  "homepage": "https://github.com/Hitchhikers-Guide-to-the-Galaxy/wiki-plugin-podcast#readme",
+  "keywords": [
+    "wiki",
+    "federated wiki",
+    "plugin",
+    "podcast",
+    "rss"
+  ]
 }
