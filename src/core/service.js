@@ -4,10 +4,12 @@
 //   update   — a podcast page on this site -> backup, then the episodes it lacks
 //   search   — a feed and a term -> matching episodes, feed first, ListenNotes second
 //   podcasts — a term -> a page of podcasts to import
+//   archive  — one episode's audio -> a copy in its page's assets folder, with provenance
 // Every outside request goes through the public-only fetch guard.
 import { findFeed, searchPodcasts } from './feedfinder.js'
 import { fetchFeed, findEpisode } from './feed.js'
-import { podcastPage, episodePage, candidatesPage, cleanImage } from './page.js'
+import { podcastPage, episodePage, candidatesPage, cleanImage, cleanAudio } from './page.js'
+import { archiveAudio } from './archive.js'
 import { guardedFetch } from './guard.js'
 import { readPage, backupPage, newEpisodes, anchorFor, refreshEdits, itemsFor, audioOnPage } from './update.js'
 import { searchFeed, searchListenNotes } from './search.js'
@@ -101,4 +103,25 @@ export async function podcasts({ q, limit } = {}, { apiKey } = {}) {
   const term = String(q || '').trim()
   const r = await searchPodcasts(term, { apiKey, fetch: publicFetch, limit: Math.max(1, Math.min(25, +limit || 12)) })
   return { ok: true, ...r, page: candidatesPage(term, r.candidates, { sources: r.sources }) }
+}
+
+// Archive one episode's audio for a page on this site: the copy, and an
+// anarchive sidecar entry saying where it came from. Nothing here edits the
+// page; the browser repoints the audio item through the journal.
+export async function archive({ siteDir, slug, feedUrl, episode, by } = {}) {
+  const feed = await feedFor(feedUrl)
+  const ep = feed.episodes.find(e => epKey(e) === episode) || findEpisode(feed, { guid: episode, title: episode })
+  if (!ep) return { ok: false, error: 'that episode is not in the feed (any more)' }
+  const url = cleanAudio(ep.audio.url)
+  const day = ep.published ? ep.published.slice(0, 10) : ''
+  const r = await archiveAudio({
+    siteDir, slug, url, fetch: publicFetch,
+    meta: {
+      title: ep.title, by: by || null,
+      caption: `${ep.title} — ${feed.title}${day ? ', ' + day : ''}`,
+      licence: feed.copyright || `© ${feed.author || feed.title}; kept for private research, not for publication`,
+      from: ep.audio.url, feed: feedUrl, guid: ep.guid, link: ep.link,
+    },
+  })
+  return { ok: true, ...r, original: url, title: ep.title }
 }

@@ -220,6 +220,54 @@
           }
         }
       }
+    },
+    "/archive.json": {
+      "post": {
+        "operationId": "archive",
+        "summary": "Keep a copy of one episode's audio in its page's assets folder",
+        "description": "For an episode page on the site asked (the origin). Downloads the episode's audio from its feed through the public-only guard (400 MB cap, refused when the disk has under 1 GB free) into assets/<slug>/, or onto the archive drive named by PODCAST_ARCHIVE_ROOT with a symlink in assets/<slug>/, and records where it came from in the folder's _anarchive.json (wiki-plugin-anarchive's sidecar: sha256, size, from, caption, licence, plus the feed and guid). Answers with the site-relative url. Nothing is written to the page: the browser repoints the audio item through the journal.",
+        "x-fedwiki-writes": true,
+        "x-fedwiki-private-only": true,
+        "x-fedwiki-spends": true,
+        "x-fedwiki-context": [
+          "origin",
+          "farmRoot"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "slug",
+                  "feedUrl",
+                  "episode"
+                ],
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "description": "The episode page's slug on this site."
+                  },
+                  "feedUrl": {
+                    "type": "string",
+                    "description": "The podcast's feed."
+                  },
+                  "episode": {
+                    "type": "string",
+                    "description": "The episode's key in the feed: its guid, or its audio URL."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The archived file: url, size, sha256, where it is stored."
+          }
+        }
+      }
     }
   }
 }

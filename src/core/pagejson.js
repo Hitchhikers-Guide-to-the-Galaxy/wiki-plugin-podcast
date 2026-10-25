@@ -15,9 +15,10 @@ export const assets = folder => ({ type: 'assets', id: nid(), text: folder })
 // A podcast item in one of its modes: find (a link or title on the first
 // line), feed (FEED url: Update Recent and search, on a podcast page) or
 // import (IMPORT url: one Podcast page button, on a candidates page).
-export function podcast({ input, feed, import: imp, title, recent, itunes, listennotes } = {}) {
+export function podcast({ input, feed, import: imp, archive, episode, title, recent, itunes, listennotes } = {}) {
   const lines = []
-  if (imp) lines.push(`IMPORT ${imp}`)
+  if (archive) { lines.push(`ARCHIVE ${archive}`); if (episode) lines.push(`EPISODE ${episode}`) }
+  else if (imp) lines.push(`IMPORT ${imp}`)
   else if (feed) lines.push(`FEED ${feed}`)
   else if (input) lines.push(input)
   if (title) lines.push(`TITLE ${title}`)

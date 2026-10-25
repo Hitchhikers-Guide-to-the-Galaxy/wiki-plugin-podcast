@@ -10,6 +10,10 @@
 //                      item; the search box finds an episode in this podcast.
 //   import  IMPORT url one card on a candidates page: Podcast page builds the
 //                      podcast's page from that feed as a ghost.
+//   archive ARCHIVE url the item an episode page carries under its audio:
+//                      Archive the audio keeps a copy in the page's assets
+//                      folder (with where it came from) and points the audio
+//                      item at it, keeping a link to the original.
 //
 // Item text (fedwiki DSL, all optional):
 //   a link or title on the first line   prefills the box (find mode)
@@ -18,6 +22,8 @@
 //   TITLE <podcast title>               hint for pages that carry several podcasts; the card title
 //   RECENT <n>                          episodes on the podcast page, and per update (default 10)
 //   ITUNES <id>, LISTENNOTES <id>       directory ids, recorded on the page and used for scoped search
+//   EPISODE <key>                       archive mode: the episode's guid (or audio URL) in the feed
+//   ARCHIVED <url>                      archive mode: written by the item once the copy is kept
 
 const API = '/system/api/podcast'
 
@@ -27,7 +33,7 @@ const mins = s => s ? `${Math.round(s / 60)} min` : ''
 const host = u => { try { return new URL(u).host.replace(/^www\./, '') } catch { return u } }
 
 export function parse(text) {
-  const out = { input: '', title: undefined, recent: undefined, feed: undefined, import: undefined, itunes: undefined, listennotes: undefined }
+  const out = { input: '', title: undefined, recent: undefined, feed: undefined, import: undefined, itunes: undefined, listennotes: undefined, archive: undefined, episode: undefined, archived: undefined }
   for (const line of String(text || '').split('\n').map(l => l.trim()).filter(Boolean)) {
     const m = line.match(/^([A-Z]+):?\s+(.*)$/)
     if (m && m[1] === 'TITLE') out.title = m[2]
@@ -36,9 +42,12 @@ export function parse(text) {
     else if (m && m[1] === 'IMPORT') out.import = m[2]
     else if (m && m[1] === 'ITUNES') out.itunes = m[2]
     else if (m && m[1] === 'LISTENNOTES') out.listennotes = m[2]
+    else if (m && m[1] === 'ARCHIVE') out.archive = m[2]
+    else if (m && m[1] === 'EPISODE') out.episode = m[2]
+    else if (m && m[1] === 'ARCHIVED') out.archived = m[2]
     else if (!out.input) out.input = line
   }
-  out.mode = out.import ? 'import' : out.feed ? 'feed' : 'find'
+  out.mode = out.archive ? 'archive' : out.import ? 'import' : out.feed ? 'feed' : 'find'
   return out
 }
 
@@ -93,6 +102,13 @@ export const emit = (div, item) => {
       <div class="pc-row"><input class="pc-q" type="text" placeholder="Search this podcast"><button class="pc-search">Search</button></div>
       <div class="pc-status"></div>
       <div class="pc-result"></div>
+    </div>`)
+  } else if (o.mode === 'archive') {
+    div.html(`<div class="podcast-item pc-archive">
+      <div class="pc-row">${o.archived
+        ? `<span class="pc-meta">The audio above plays from this page's own copy, <a href="${esc(o.archived)}" target="_blank" rel="noopener">${esc(o.archived.split('/').pop())}</a>.</span>`
+        : `<button class="pc-keep">Archive the audio</button><span class="pc-meta">keeps a copy in this page's assets folder, with where it came from, and plays from it</span>`}</div>
+      <div class="pc-status"></div>
     </div>`)
   } else if (o.mode === 'import') {
     div.html(`<div class="podcast-item pc-import">
@@ -255,6 +271,30 @@ export const bind = (div, item) => {
     } catch (e) { status(e.message, true) } finally { busy(false) }
   }
 
+  // archive mode -------------------------------------------------------------
+  async function keep() {
+    const $p = $page()
+    if (!localPage($p)) { status('Fork this page to this site first: the copy is kept in its assets folder.', true); return }
+    const slug = $p.attr('id')
+    busy(true); status('Downloading the audio… a long episode takes a minute or two.')
+    try {
+      const r = await call('archive', { slug, feedUrl: opts.archive, episode: opts.episode })
+      // The audio item to repoint: the one playing this episode's audio, else the first on the page.
+      const $items = $p.find('.story:first').children('.item.audio')
+      let $audio = $items.filter((i, el) => String($(el).data('item')?.text || '').split('\n')[0] === r.original)
+      if (!$audio.length) $audio = $items.first()
+      if ($audio.length) {
+        const a = $audio.data('item')
+        const [, ...caption] = String(a.text || '').split('\n')
+        const mb = Math.round(r.size / 1e6)
+        const text = `${r.url}\n${caption.join(' ').trim()} — archived copy, ${mb} MB; [${r.original} original]`
+        await editItem($p, { id: a.id, text })
+      }
+      const mine = String(item.text || '').split('\n').filter(l => !/^ARCHIVED\b/.test(l)).concat(`ARCHIVED ${r.url}`).join('\n')
+      await editItem($p, { id: item.id, text: mine })
+    } catch (e) { status(e.message, true); busy(false) }
+  }
+
   async function search() {
     const q = div.find('.pc-q')[0].value.trim()
     if (!q) { status('Type a word or two to look for in this podcast.', true); return }
@@ -275,6 +315,7 @@ export const bind = (div, item) => {
     if (b.classList.contains('pc-find')) find()
     else if (b.classList.contains('pc-more')) findPodcasts()
     else if (b.classList.contains('pc-update')) update()
+    else if (b.classList.contains('pc-keep')) keep()
     else if (b.classList.contains('pc-search')) search()
     else if (b.classList.contains('pc-pod')) ghost({ feedUrl: found().feedUrl, found: found() })
     else if (b.classList.contains('pc-ep')) ghost({ feedUrl: found().feedUrl, found: found(), episodeKey: b.dataset.key })

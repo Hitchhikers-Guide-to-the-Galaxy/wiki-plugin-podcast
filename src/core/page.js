@@ -96,7 +96,7 @@ export async function episodePage(feed, ep, { found = {}, fetch } = {}) {
   const [url] = (await httpsAudio([ep.audio.url], { fetch })).values()
   const opener = `${paras[0] || ep.subtitle || ep.title} From [[${feed.title}]].`
 
-  const story = [markdown(opener), audio(url, episodeCaption(ep, { withLink: false }))]
+  const story = [markdown(opener), audio(url, episodeCaption(ep, { withLink: false })), podcast({ archive: feedUrl, episode: ep.guid || ep.audio.url })]
   if (ep.image && ep.image !== feed.image) story.push(image(cleanImage(ep.image), `${ep.title}. Episode artwork from the feed.`))
   for (const p of paras.slice(1, MAX_NOTES)) story.push(markdown(p))
   if (paras.length > MAX_NOTES) story.push(markdown(`*The show notes go on; ${paras.length - MAX_NOTES} more paragraphs are in the feed.*`))

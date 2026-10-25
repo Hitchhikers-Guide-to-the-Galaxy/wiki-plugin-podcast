@@ -8,6 +8,7 @@
 //   update   — a podcast page on the origin site -> backup + the episodes it lacks
 //   search   — a feed and a term -> matching episodes
 //   podcasts — a term -> a page of podcasts to import
+//   archive  — one episode's audio -> a copy in its page's assets folder
 //
 // All are declared as writes in openapi.json: they reach the public internet
 // and spend the ListenNotes quota, so only a private site's signed-in owner
@@ -112,4 +113,22 @@ const podcasts = async args => {
   return r
 }
 
-module.exports = { find, page, update, search, podcasts }
+const archive = async args => {
+  pace()
+  const slug = text(args.slug, 200, 'The page slug')
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) throw problem(400, 'That is not a page slug.')
+  const feedUrl = text(args.feedUrl, 2000, 'The feed')
+  if (!/^https?:\/\//i.test(feedUrl)) throw problem(400, 'That is not a feed link.')
+  const episode = text(args.episode, 2000, 'The episode')
+  if (!episode) throw problem(400, 'Which episode? The item names it with EPISODE.')
+  const siteDir = siteDirOf(args)
+  if (!fs.existsSync(path.join(siteDir, 'pages', slug))) throw problem(404, `no page ${slug} on this site; fork the page here first`)
+  const { archive } = await core('service.js')
+  let r
+  try { r = await archive({ siteDir, slug, feedUrl, episode }) } catch (e) { throw problem(e.status || 502, e.message) }
+  log(`archive ${args.origin}/${slug}: ${r.ok ? `${r.file} ${Math.round(r.size / 1e6)} MB sha256 ${r.sha256.slice(0, 12)} at ${r.stored}` : r.error}`)
+  if (!r.ok) throw problem(404, r.error)
+  return r
+}
+
+module.exports = { find, page, update, search, podcasts, archive }
