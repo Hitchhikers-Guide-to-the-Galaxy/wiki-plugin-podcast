@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+  <title>Café &amp; Société — “Talks”</title>
+  <link>https://example.org/cafe</link>
+  <description><![CDATA[<p>Two friends’ conversations about <a href="https://example.org/ideas">ideas</a>.</p><p>Second paragraph – with an en dash.</p>]]></description>
+  <itunes:author>Zoë Ångström</itunes:author>
+  <itunes:image href="http://example.org/art.jpg"/>
+  <itunes:category text="Society &amp; Culture"><itunes:category text="Philosophy"/></itunes:category>
+  <language>fr</language>
+  <item>
+    <title>Épisode 2: “Naïve” questions</title>
+    <guid isPermaLink="false">ep-2</guid>
+    <pubDate>Tue, 20 Oct 2026 08:00:00 +0000</pubDate>
+    <itunes:duration>1:02:03</itunes:duration>
+    <description>Short description only.</description>
+    <content:encoded><![CDATA[<p>We ask <strong>naïve</strong> questions.</p><ul><li>One</li><li>Two &amp; three</li></ul><p>More at <a href="https://example.org/ep2">the episode page</a>.</p>]]></content:encoded>
+    <enclosure url="http://cdn.example.org/ep2.mp3" length="12345678" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>Episode 1</title>
+    <guid>ep-1</guid>
+    <pubDate>Tue, 13 Oct 2026 08:00:00 +0000</pubDate>
+    <itunes:duration>2700</itunes:duration>
+    <description><![CDATA[Plain text notes.]]></description>
+    <enclosure url="https://cdn.example.org/ep1.m4a" length="1000" type="audio/x-m4a"/>
+  </item>
+  <item>
+    <title>A blog post without audio</title>
+    <guid>post-1</guid>
+  </item>
+</channel>
+</rss>

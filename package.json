@@ -4,12 +4,19 @@
   "private": true,
   "description": "Federated Wiki - Podcast plugin: any podcast link in, its open RSS feed out, then a wiki page built from the feed. Private research until cleared.",
   "type": "module",
-  "bin": { "find-feed": "bin/find-feed.js" },
+  "bin": {
+    "find-feed": "bin/find-feed.js"
+  },
   "scripts": {
-    "test": "node --test test/unit.test.js",
+    "test": "node --test test/unit.test.js test/page.test.js",
     "test:live": "node --test --test-concurrency=1 test/live.test.js"
   },
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "author": "David Bovill",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fast-xml-parser": "^5.11.2"
+  }
 }
