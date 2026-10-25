@@ -31,7 +31,7 @@ async function call(op, body) {
   })
   let data = {}
   try { data = await r.json() } catch { /* not json */ }
-  if (r.status === 401 || r.status === 403) throw new Error(data.error || data.message || 'Sign in as this site\'s owner to look podcasts up (and only on a private site).')
+  if (r.status === 401 || r.status === 403) throw new Error('Sign in as this site\'s owner to look podcasts up. The podcast box works only for the owner, and only on a private site.')
   if (r.status === 404 && !data.error && !data.message) throw new Error('This farm has no podcast service. Is wiki-plugin-podcast installed here?')
   if (!r.ok) throw new Error(data.error || data.message || `The farm answered ${r.status}.`)
   return data
