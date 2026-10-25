@@ -78,10 +78,39 @@ async function itunesLookup(id, ctx) {
   return r ? { itunesId: String(r.collectionId), title: r.collectionName, feedUrl: r.feedUrl } : null
 }
 
-async function itunesSearch(term, ctx) {
-  const { json } = await getJson(`${ITUNES}search?media=podcast&entity=podcast&limit=10&term=${encodeURIComponent(term)}`, { fetch: ctx.fetch })
+export async function itunesSearch(term, ctx, limit = 10) {
+  const { json } = await getJson(`${ITUNES}search?media=podcast&entity=podcast&limit=${limit}&term=${encodeURIComponent(term)}`, { fetch: ctx.fetch })
   return (json.results || []).filter(r => r.feedUrl)
-    .map(r => ({ itunesId: String(r.collectionId), title: r.collectionName, feedUrl: r.feedUrl, author: r.artistName }))
+    .map(r => ({ itunesId: String(r.collectionId), title: r.collectionName, feedUrl: r.feedUrl, author: r.artistName,
+      image: r.artworkUrl600 || r.artworkUrl100, count: r.trackCount, latest: r.releaseDate, genre: r.primaryGenreName }))
+}
+
+// Podcasts matching a term, for a page of candidates: Apple's directory
+// first (free, carries the feed), ListenNotes when Apple offers few, each of
+// its hits mapped to a feed through the Apple lookup. Best title match first.
+export async function searchPodcasts(term, { apiKey, fetch = globalThis.fetch, limit = 12 } = {}) {
+  const ctx = { apiKey, fetch, steps: [] }
+  const seen = new Map()
+  const sources = ['Apple Podcasts']
+  step(ctx, `iTunes search "${term}"`)
+  for (const h of await itunesSearch(term, ctx, 25)) if (!seen.has(norm(h.feedUrl))) seen.set(norm(h.feedUrl), { ...h, source: 'apple' })
+  if (seen.size < 3 && apiKey) {
+    step(ctx, `ListenNotes search "${term}"`)
+    sources.push('ListenNotes')
+    const res = await listen(`search?type=podcast&only_in=title,author&q=${encodeURIComponent(term)}`, ctx)
+    for (const p of (res.results || []).slice(0, 8)) {
+      if (!p.itunes_id) continue
+      const look = await itunesLookup(p.itunes_id, ctx).catch(() => null)
+      if (!look?.feedUrl) continue
+      const k = norm(look.feedUrl)
+      if (seen.has(k)) { seen.get(k).listennotesId = p.id; continue }
+      seen.set(k, { ...look, listennotesId: p.id, author: p.publisher_original, image: p.image, count: p.total_episodes,
+        latest: p.latest_pub_date_ms ? new Date(p.latest_pub_date_ms).toISOString() : undefined, source: 'listennotes' })
+    }
+  }
+  const candidates = [...seen.values()].map(h => ({ ...h, score: +titleScore(term, h.title).toFixed(2) }))
+    .sort((a, b) => b.score - a.score || (b.count || 0) - (a.count || 0)).slice(0, limit)
+  return { term, candidates, sources, steps: ctx.steps, usage: ctx.usage }
 }
 
 async function listen(path, ctx) {

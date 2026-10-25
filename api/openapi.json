@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Podcast",
-    "version": "0.1.0",
-    "description": "Podcast links to wiki pages. Find takes any podcast link (a feed, BBC, Apple Podcasts, ListenNotes, a show's website) or a title and finds the podcast's open RSS feed. Page builds a podcast page or an episode page from that feed, for the browser to show as a ghost page to fork. Both reach the public internet and spend the farm's ListenNotes quota, so only the signed-in owner of a private site may call them, and they are never offered to agents."
+    "version": "0.2.0",
+    "description": "Podcast links to wiki pages. Find takes any podcast link (a feed, BBC, Apple Podcasts, ListenNotes, a show's website) or a title and finds the podcast's open RSS feed. Page builds a podcast page or an episode page from that feed, for the browser to show as a ghost page to fork. Both reach the public internet and spend the farm's ListenNotes quota, so only the signed-in owner of a private site may call them, and they are never offered to agents. Update re-reads a podcast page's feed and answers with the episodes the page lacks, after backing the page up into its assets folder; the browser adds them through the wiki's journal. Search finds episodes inside one podcast, in the feed first and then ListenNotes scoped to the podcast. Podcasts searches the directories for a title and answers with a page of candidates to import."
   },
   "paths": {
     "/find.json": {
@@ -14,13 +14,34 @@
         "x-fedwiki-writes": true,
         "x-fedwiki-private-only": true,
         "x-fedwiki-context": [],
-        "requestBody": { "required": true, "content": { "application/json": { "schema": {
-          "type": "object", "required": ["input"],
-          "properties": {
-            "input": { "type": "string", "description": "A podcast or episode link, or a podcast title." },
-            "title": { "type": "string", "description": "Optional title hint, for pages that carry several podcasts." }
-          } } } } },
-        "responses": { "200": { "description": "The finder's result and a podcast summary." } }
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "input"
+                ],
+                "properties": {
+                  "input": {
+                    "type": "string",
+                    "description": "A podcast or episode link, or a podcast title."
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Optional title hint, for pages that carry several podcasts."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The finder's result and a podcast summary."
+          }
+        }
       }
     },
     "/page.json": {
@@ -31,15 +52,173 @@
         "x-fedwiki-writes": true,
         "x-fedwiki-private-only": true,
         "x-fedwiki-context": [],
-        "requestBody": { "required": true, "content": { "application/json": { "schema": {
-          "type": "object", "required": ["feedUrl"],
-          "properties": {
-            "feedUrl": { "type": "string", "description": "The feed, as find answered it." },
-            "episode": { "type": "string", "description": "An episode key (its guid or audio URL) from find. Omit for the podcast page." },
-            "found": { "type": "object", "description": "Find's facts to record on the page: route, itunesId, listennotesId, movedFrom." },
-            "recent": { "type": "integer", "description": "How many recent episodes the podcast page lists (1-50, default 10)." }
-          } } } } },
-        "responses": { "200": { "description": "Page JSON." } }
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "feedUrl"
+                ],
+                "properties": {
+                  "feedUrl": {
+                    "type": "string",
+                    "description": "The feed, as find answered it."
+                  },
+                  "episode": {
+                    "type": "string",
+                    "description": "An episode key (its guid or audio URL) from find. Omit for the podcast page."
+                  },
+                  "found": {
+                    "type": "object",
+                    "description": "Find's facts to record on the page: route, itunesId, listennotesId, movedFrom."
+                  },
+                  "recent": {
+                    "type": "integer",
+                    "description": "How many recent episodes the podcast page lists (1-50, default 10)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Page JSON."
+          }
+        }
+      }
+    },
+    "/update.json": {
+      "post": {
+        "operationId": "update",
+        "summary": "Back a podcast page up, then say which episodes its feed has gained",
+        "description": "For a podcast page on the site asked (the origin). Reads the page from the site's own disk, copies it to assets/<slug>/backups/ when there is something to add, re-reads the feed, and answers with audio items for the newest episodes the page lacks (at most recent), the item to add them after, and the Recent Episodes strap and About table rows to refresh. Nothing is written to the page: the browser applies the adds and edits through the wiki's journal, so each one is in the page's history and the backup is there to rewind to.",
+        "x-fedwiki-writes": true,
+        "x-fedwiki-private-only": true,
+        "x-fedwiki-context": [
+          "origin",
+          "farmRoot"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "slug",
+                  "feedUrl"
+                ],
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "description": "The podcast page's slug on this site."
+                  },
+                  "feedUrl": {
+                    "type": "string",
+                    "description": "The podcast's feed, from the page's own FEED line."
+                  },
+                  "recent": {
+                    "type": "integer",
+                    "description": "At most this many new episodes in one update (1-50, default 10)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "backup (asset path, when there was something to add), added (audio items, newest first), edits ({id, text}), after (item id), feed ({count, newest, have, missing})."
+          }
+        }
+      }
+    },
+    "/search.json": {
+      "post": {
+        "operationId": "search",
+        "summary": "Find episodes inside one podcast",
+        "description": "Searches the feed's own items first: every query word in the title ranks highest, then in the show notes. When the feed gives fewer than three hits and the podcast's ListenNotes id is known, asks ListenNotes scoped to that podcast too; those hits are mapped back to the feed by guid or audio URL, and ones the feed no longer carries are listed but have no page to build.",
+        "x-fedwiki-writes": true,
+        "x-fedwiki-private-only": true,
+        "x-fedwiki-context": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "feedUrl",
+                  "q"
+                ],
+                "properties": {
+                  "feedUrl": {
+                    "type": "string",
+                    "description": "The podcast's feed."
+                  },
+                  "q": {
+                    "type": "string",
+                    "description": "A word or two to look for."
+                  },
+                  "listennotesId": {
+                    "type": "string",
+                    "description": "The podcast's ListenNotes id, for the scoped search."
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "At most this many feed hits (1-50, default 20)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "hits ({key, title, published, duration, where, snippet, inFeed}), source (feed or feed+listennotes), count."
+          }
+        }
+      }
+    },
+    "/podcasts.json": {
+      "post": {
+        "operationId": "podcasts",
+        "summary": "Find podcasts by title: a page of candidates to import",
+        "description": "Searches Apple's podcast directory for the term, and ListenNotes too when Apple offers fewer than three, mapping each hit to its open feed. Answers with the candidates (best title match first) and page JSON listing them, one card and one Podcast page button each, for the browser to show as a ghost page.",
+        "x-fedwiki-writes": true,
+        "x-fedwiki-private-only": true,
+        "x-fedwiki-context": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "q"
+                ],
+                "properties": {
+                  "q": {
+                    "type": "string",
+                    "description": "A podcast title, or a word or two of it."
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "At most this many candidates (1-25, default 12)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "candidates ({title, author, feedUrl, itunesId, listennotesId, count, latest, genre, score}), sources, page (page JSON)."
+          }
+        }
       }
     }
   }

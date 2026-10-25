@@ -12,6 +12,21 @@ export const audio = (url, caption) => ({ type: 'audio', id: nid(), text: `${url
 export const image = (url, caption) => ({ type: 'image', id: nid(), url, text: caption, caption })
 export const assets = folder => ({ type: 'assets', id: nid(), text: folder })
 
+// A podcast item in one of its modes: find (a link or title on the first
+// line), feed (FEED url: Update Recent and search, on a podcast page) or
+// import (IMPORT url: one Podcast page button, on a candidates page).
+export function podcast({ input, feed, import: imp, title, recent, itunes, listennotes } = {}) {
+  const lines = []
+  if (imp) lines.push(`IMPORT ${imp}`)
+  else if (feed) lines.push(`FEED ${feed}`)
+  else if (input) lines.push(input)
+  if (title) lines.push(`TITLE ${title}`)
+  if (recent && recent !== 10) lines.push(`RECENT ${recent}`)
+  if (itunes) lines.push(`ITUNES ${itunes}`)
+  if (listennotes) lines.push(`LISTENNOTES ${listennotes}`)
+  return { type: 'podcast', id: nid(), text: lines.join('\n') }
+}
+
 // Table plugin item: directives, a blank line, then a pipe table.
 export function table(columns, rows, { caption, layout = 'table', fit = 'first' } = {}) {
   const cell = v => String(v ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ')

@@ -4,7 +4,7 @@
     {
       "type": "markdown",
       "id": "0259f9525714715f",
-      "text": "The Podcast Plugin turns a podcast link into wiki pages. Paste or drop any podcast link — a feed, a BBC Sounds or programme page, Apple Podcasts, ListenNotes, a show's website — or type a title. The farm finds the podcast's open RSS feed, and from it builds a podcast page or an episode page, shown as a ghost page to fork."
+      "text": "The Podcast Plugin turns a podcast link into wiki pages, and keeps them current. Paste or drop any podcast link \u2014 a feed, a BBC Sounds or programme page, Apple Podcasts, ListenNotes, a show's website \u2014 or type a title. The farm finds the podcast's open RSS feed, and from it builds a podcast page or an episode page, shown as a ghost page to fork. A podcast page carries its own Update Recent button and a search box; Find podcasts turns a title into a page of candidates to import."
     },
     {
       "type": "podcast",
@@ -29,7 +29,37 @@
     {
       "type": "markdown",
       "id": "7b935d25307f19b2",
-      "text": "- the first line prefills the box: a link or a title\n- TITLE: a podcast title, when the link is a site that carries several podcasts\n- RECENT: how many recent episodes the podcast page lists (default 10)"
+      "text": "- the first line prefills the box: a link or a title (find mode)\n- FEED: the podcast's feed; the item then shows Update Recent and a search box, as on every page the plugin builds\n- IMPORT: a feed; the item is one Podcast page button, as on a candidates page\n- TITLE: a podcast title, when the link is a site that carries several podcasts; the card's title in import mode\n- RECENT: how many recent episodes the podcast page lists, and how many one update adds at most (default 10)\n- ITUNES and LISTENNOTES: directory ids, recorded on the page; the ListenNotes id scopes the search"
+    },
+    {
+      "type": "markdown",
+      "id": "4199e88e0cf5a116",
+      "text": "# Keeping A Page Current\n> Update Recent, with a backup first."
+    },
+    {
+      "type": "markdown",
+      "id": "6476ecdd8fd083cf",
+      "text": "Every podcast page the plugin builds carries a podcast item under its Recent Episodes heading, with the feed on its FEED line. Update Recent asks the farm to re-read the feed: the farm copies the page file into the page's assets folder first (assets/<slug>/backups/), then answers with the episodes newer than the newest on the page. The item adds them right under itself through the wiki's own journal, newest on top, and refreshes the Recent Episodes count and the About table, so the page's history shows each new episode and the backup is there to rewind to. Older episodes the page never listed stay unlisted: the page shows the newest, not everything. Fork a page to your site before updating it; the farm reads and backs up only the page on the site asked."
+    },
+    {
+      "type": "markdown",
+      "id": "d4821a3a04adb288",
+      "text": "# Searching A Podcast\n> The feed first, then ListenNotes scoped to the show."
+    },
+    {
+      "type": "markdown",
+      "id": "ba059b7e9ca3746e",
+      "text": "The search box on a podcast page looks through the feed's own episodes: every word in the title ranks highest, then in the show notes, newest first among equals. When the feed gives fewer than three hits and the page knows the podcast's ListenNotes id, the farm asks ListenNotes too, scoped to that one podcast; those hits are mapped back onto the feed, and an episode the feed no longer carries is listed but has no page to build. Each hit's page button opens the episode page as a ghost."
+    },
+    {
+      "type": "markdown",
+      "id": "639dab3aaf6da871",
+      "text": "# Finding Podcasts\n> A title in, a page of candidates out."
+    },
+    {
+      "type": "markdown",
+      "id": "87517a088fa18747",
+      "text": "Find looks a title up and picks the best match. Find podcasts instead searches Apple's podcast directory (and ListenNotes, when Apple offers few) and opens a ghost page of candidates, best title match first: one card per podcast with its author, episode count, newest date and genre, a Podcast page button that builds that podcast's page from its open feed, and the same list as a table. Fork the candidates page to keep the shortlist."
     },
     {
       "type": "markdown",
@@ -56,7 +86,7 @@
           {
             "type": "markdown",
             "id": "0259f9525714715f",
-            "text": "The Podcast Plugin turns a podcast link into wiki pages. Paste or drop any podcast link — a feed, a BBC Sounds or programme page, Apple Podcasts, ListenNotes, a show's website — or type a title. The farm finds the podcast's open RSS feed, and from it builds a podcast page or an episode page, shown as a ghost page to fork."
+            "text": "The Podcast Plugin turns a podcast link into wiki pages. Paste or drop any podcast link \u2014 a feed, a BBC Sounds or programme page, Apple Podcasts, ListenNotes, a show's website \u2014 or type a title. The farm finds the podcast's open RSS feed, and from it builds a podcast page or an episode page, shown as a ghost page to fork."
           },
           {
             "type": "podcast",
@@ -101,7 +131,7 @@
         ]
       },
       "date": 1792937018999,
-      "provenance": "Authored by an AI agent — Claude Code (Opus 5.5) with David Bovill, 2026-10-25, via the fedwiki-create-plugin skill. [https://claude.com/claude-code Claude Code]",
+      "provenance": "Authored by an AI agent \u2014 Claude Code (Opus 5.5) with David Bovill, 2026-10-25, via the fedwiki-create-plugin skill. [https://claude.com/claude-code Claude Code]",
       "meta": {
         "v": 1,
         "act": "create",
@@ -110,6 +140,172 @@
           "name": "Claude Code",
           "session": "de7bf413-9558-4432-8859-fed9a6b32242",
           "model": "claude-opus-5-5"
+        }
+      }
+    },
+    {
+      "type": "edit",
+      "id": "0259f9525714715f",
+      "item": {
+        "type": "markdown",
+        "id": "0259f9525714715f",
+        "text": "The Podcast Plugin turns a podcast link into wiki pages, and keeps them current. Paste or drop any podcast link \u2014 a feed, a BBC Sounds or programme page, Apple Podcasts, ListenNotes, a show's website \u2014 or type a title. The farm finds the podcast's open RSS feed, and from it builds a podcast page or an episode page, shown as a ghost page to fork. A podcast page carries its own Update Recent button and a search box; Find podcasts turns a title into a page of candidates to import."
+      },
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "edit",
+      "id": "7b935d25307f19b2",
+      "item": {
+        "type": "markdown",
+        "id": "7b935d25307f19b2",
+        "text": "- the first line prefills the box: a link or a title (find mode)\n- FEED: the podcast's feed; the item then shows Update Recent and a search box, as on every page the plugin builds\n- IMPORT: a feed; the item is one Podcast page button, as on a candidates page\n- TITLE: a podcast title, when the link is a site that carries several podcasts; the card's title in import mode\n- RECENT: how many recent episodes the podcast page lists, and how many one update adds at most (default 10)\n- ITUNES and LISTENNOTES: directory ids, recorded on the page; the ListenNotes id scopes the search"
+      },
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "add",
+      "id": "4199e88e0cf5a116",
+      "item": {
+        "type": "markdown",
+        "id": "4199e88e0cf5a116",
+        "text": "# Keeping A Page Current\n> Update Recent, with a backup first."
+      },
+      "after": "7b935d25307f19b2",
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "add",
+      "id": "6476ecdd8fd083cf",
+      "item": {
+        "type": "markdown",
+        "id": "6476ecdd8fd083cf",
+        "text": "Every podcast page the plugin builds carries a podcast item under its Recent Episodes heading, with the feed on its FEED line. Update Recent asks the farm to re-read the feed: the farm copies the page file into the page's assets folder first (assets/<slug>/backups/), then answers with the episodes newer than the newest on the page. The item adds them right under itself through the wiki's own journal, newest on top, and refreshes the Recent Episodes count and the About table, so the page's history shows each new episode and the backup is there to rewind to. Older episodes the page never listed stay unlisted: the page shows the newest, not everything. Fork a page to your site before updating it; the farm reads and backs up only the page on the site asked."
+      },
+      "after": "4199e88e0cf5a116",
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "add",
+      "id": "d4821a3a04adb288",
+      "item": {
+        "type": "markdown",
+        "id": "d4821a3a04adb288",
+        "text": "# Searching A Podcast\n> The feed first, then ListenNotes scoped to the show."
+      },
+      "after": "6476ecdd8fd083cf",
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "add",
+      "id": "ba059b7e9ca3746e",
+      "item": {
+        "type": "markdown",
+        "id": "ba059b7e9ca3746e",
+        "text": "The search box on a podcast page looks through the feed's own episodes: every word in the title ranks highest, then in the show notes, newest first among equals. When the feed gives fewer than three hits and the page knows the podcast's ListenNotes id, the farm asks ListenNotes too, scoped to that one podcast; those hits are mapped back onto the feed, and an episode the feed no longer carries is listed but has no page to build. Each hit's page button opens the episode page as a ghost."
+      },
+      "after": "d4821a3a04adb288",
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "add",
+      "id": "639dab3aaf6da871",
+      "item": {
+        "type": "markdown",
+        "id": "639dab3aaf6da871",
+        "text": "# Finding Podcasts\n> A title in, a page of candidates out."
+      },
+      "after": "ba059b7e9ca3746e",
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
+        }
+      }
+    },
+    {
+      "type": "add",
+      "id": "87517a088fa18747",
+      "item": {
+        "type": "markdown",
+        "id": "87517a088fa18747",
+        "text": "Find looks a title up and picks the best match. Find podcasts instead searches Apple's podcast directory (and ListenNotes, when Apple offers few) and opens a ghost page of candidates, best title match first: one card per podcast with its author, episode count, newest date and genre, a Podcast page button that builds that podcast's page from its open feed, and the same list as a table. Fork the candidates page to keep the shortlist."
+      },
+      "after": "639dab3aaf6da871",
+      "date": 1792941681414,
+      "meta": {
+        "v": 1,
+        "act": "revise",
+        "label": "Phase 5",
+        "agent": {
+          "kind": "ai",
+          "name": "Claude Code",
+          "session": "33850fc7-eda5-4e58-b9e4-09ae5f7a2225"
         }
       }
     }

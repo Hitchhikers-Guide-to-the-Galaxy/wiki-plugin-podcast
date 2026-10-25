@@ -3,14 +3,20 @@
 // CommonJS (see sibling package.json); the work is done by the ESM modules in
 // src/core, loaded with import().
 //
-//   find — a link or title -> the open feed + a podcast summary
-//   page — a feed (and maybe an episode) -> page JSON for a ghost page
+//   find     — a link or title -> the open feed + a podcast summary
+//   page     — a feed (and maybe an episode) -> page JSON for a ghost page
+//   update   — a podcast page on the origin site -> backup + the episodes it lacks
+//   search   — a feed and a term -> matching episodes
+//   podcasts — a term -> a page of podcasts to import
 //
-// Both are declared as writes in openapi.json: they reach the public internet
+// All are declared as writes in openapi.json: they reach the public internet
 // and spend the ListenNotes quota, so only a private site's signed-in owner
-// may call them, and the farm's MCP agent door never offers them.
+// may call them, and the farm's MCP agent door never offers them. Update also
+// declares the origin and farmRoot context: it reads the page from the site's
+// own disk and writes the backup beside it, and only there.
 
 const path = require('node:path')
+const fs = require('node:fs')
 const { pathToFileURL } = require('node:url')
 
 const problem = (status, message) => Object.assign(new Error(message), { status })
@@ -55,4 +61,55 @@ const page = async args => {
   return r
 }
 
-module.exports = { find, page }
+// The origin site's directory under the farm root, as the farm supplied them.
+// Both come from the farm, never the caller; the checks are against drift
+// between farms (a port suffix, a single-site root), not against people.
+const siteDirOf = ({ origin, farmRoot }) => {
+  if (!origin || !farmRoot) throw problem(500, 'the farm did not say which site this is')
+  const names = [String(origin), String(origin).replace(/:\d+$/, '')]
+  for (const n of names) {
+    const dir = path.join(farmRoot, n)
+    if (path.dirname(dir) === path.resolve(farmRoot) && fs.existsSync(path.join(dir, 'pages'))) return dir
+  }
+  if (names.includes(path.basename(farmRoot)) && fs.existsSync(path.join(farmRoot, 'pages'))) return farmRoot
+  throw problem(500, `no site directory for ${origin} under the farm root`)
+}
+
+const update = async args => {
+  pace()
+  const slug = text(args.slug, 200, 'The page slug')
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) throw problem(400, 'That is not a page slug.')
+  const feedUrl = text(args.feedUrl, 2000, 'The feed')
+  if (!/^https?:\/\//i.test(feedUrl)) throw problem(400, 'That is not a feed link.')
+  const siteDir = siteDirOf(args)
+  const { update } = await core('service.js')
+  const r = await update({ siteDir, slug, feedUrl, recent: args.recent })
+  log(`update ${args.origin}/${slug} from ${feedUrl}: ${r.ok ? `${r.added.length} new of ${r.feed.missing} missing${r.backup ? ', backup ' + r.backup : ''}` : r.error}`)
+  if (!r.ok) throw problem(404, r.error)
+  return r
+}
+
+const search = async args => {
+  pace()
+  const feedUrl = text(args.feedUrl, 2000, 'The feed')
+  if (!/^https?:\/\//i.test(feedUrl)) throw problem(400, 'That is not a feed link.')
+  const q = text(args.q, 200, 'The search')
+  if (!q) throw problem(400, 'Type a word or two to search for.')
+  const listennotesId = text(args.listennotesId, 64, 'The ListenNotes id') || undefined
+  const [{ search }, { listenNotesKey }] = await Promise.all([core('service.js'), core('keys.js')])
+  const r = await search({ feedUrl, q, listennotesId, limit: args.limit }, { apiKey: await listenNotesKey() })
+  log(`search "${q}" in ${feedUrl}: ${r.hits.length} hits (${r.source})`)
+  return r
+}
+
+const podcasts = async args => {
+  pace()
+  const q = text(args.q, 200, 'The search')
+  if (!q) throw problem(400, 'Type a podcast title or a word or two to search for.')
+  const [{ podcasts }, { listenNotesKey }] = await Promise.all([core('service.js'), core('keys.js')])
+  const r = await podcasts({ q, limit: args.limit }, { apiKey: await listenNotesKey() })
+  log(`podcasts "${q}": ${r.candidates.length} candidates (${r.sources.join(', ')})`)
+  return r
+}
+
+module.exports = { find, page, update, search, podcasts }
