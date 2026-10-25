@@ -1,0 +1,955 @@
+[
+  {
+    "podcast": "Planet: Critical",
+    "slug": "planet-critical",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/190eb24695f140b7aac85a7c6c135ddd/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feed.podbean.com/planetcritical/feed.xml",
+    "feedTitle": "Planet: Critical",
+    "episodes": 292,
+    "latest": "2026-10-22T05:30:00.000Z",
+    "sameAsOld": false,
+    "steps": [
+      "ListenNotes podcast 190eb24695f140b7aac85a7c6c135ddd",
+      "ListenNotes says itunes_id 1545009586",
+      "check https://feed.podbean.com/planetcritical/feed.xml"
+    ]
+  },
+  {
+    "podcast": "Planet: Critical",
+    "slug": "planet-critical",
+    "how": "website + title",
+    "input": "https://www.planetcritical.com/podcast",
+    "verdict": "right",
+    "ok": true,
+    "route": "page+search",
+    "feedUrl": "https://feed.podbean.com/planetcritical/feed.xml",
+    "feedTitle": "Planet: Critical",
+    "episodes": 292,
+    "latest": "2026-10-22T05:30:00.000Z",
+    "sameAsOld": false,
+    "steps": [
+      "fetch page https://www.planetcritical.com/podcast",
+      "page answered HTTP 404; trying https://www.planetcritical.com/",
+      "page \"Planet: Critical\": 1 feed link(s), 0 Apple link(s)",
+      "no feed on the page",
+      "iTunes search \"Planet: Critical\"",
+      "check https://feed.podbean.com/planetcritical/feed.xml"
+    ]
+  },
+  {
+    "podcast": "Planet: Critical",
+    "slug": "planet-critical",
+    "how": "title only",
+    "input": "Planet: Critical",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://feed.podbean.com/planetcritical/feed.xml",
+    "feedTitle": "Planet: Critical",
+    "episodes": 292,
+    "latest": "2026-10-22T05:30:00.000Z",
+    "sameAsOld": false,
+    "steps": [
+      "iTunes search \"Planet: Critical\"",
+      "check https://feed.podbean.com/planetcritical/feed.xml"
+    ]
+  },
+  {
+    "podcast": "Planet: Critical",
+    "slug": "planet-critical",
+    "how": "old feed URL",
+    "input": "https://feeds.simplecast.com/LDNGIWOE",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss+newer",
+    "feedUrl": "https://feed.podbean.com/planetcritical/feed.xml",
+    "movedFrom": "https://feeds.simplecast.com/LDNGIWOE",
+    "feedTitle": "Planet: Critical",
+    "episodes": 292,
+    "latest": "2026-10-22T05:30:00.000Z",
+    "sameAsOld": false,
+    "steps": [
+      "check https://feeds.simplecast.com/LDNGIWOE",
+      "latest episode 2025-10-09: looking for a newer feed",
+      "iTunes search \"Planet: Critical\"",
+      "check https://feed.podbean.com/planetcritical/feed.xml",
+      "newer feed https://feed.podbean.com/planetcritical/feed.xml (latest 2026-10-22)"
+    ]
+  },
+  {
+    "podcast": "No Stupid Questions",
+    "slug": "no-stupid-questions",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/e49bcb641c7a4b9b993fc55086cd634a/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feeds.simplecast.com/dfh_verV",
+    "feedTitle": "No Stupid Questions",
+    "episodes": 344,
+    "latest": "2026-10-25T00:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast e49bcb641c7a4b9b993fc55086cd634a",
+      "ListenNotes says itunes_id 1510056899",
+      "check https://feeds.simplecast.com/dfh_verV"
+    ]
+  },
+  {
+    "podcast": "No Stupid Questions",
+    "slug": "no-stupid-questions",
+    "how": "website + title",
+    "input": "https://freakonomics.com",
+    "verdict": "right",
+    "ok": true,
+    "route": "page",
+    "feedUrl": "https://feeds.simplecast.com/dfh_verV",
+    "feedTitle": "No Stupid Questions",
+    "episodes": 344,
+    "latest": "2026-10-25T00:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "fetch page https://freakonomics.com",
+      "page \"Freakonomics\": 0 feed link(s), 5 Apple link(s)",
+      "check https://feeds.simplecast.com/dfh_verV"
+    ]
+  },
+  {
+    "podcast": "No Stupid Questions",
+    "slug": "no-stupid-questions",
+    "how": "title only",
+    "input": "No Stupid Questions",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://feeds.simplecast.com/dfh_verV",
+    "feedTitle": "No Stupid Questions",
+    "episodes": 344,
+    "latest": "2026-10-25T00:00:00.000Z",
+    "sameAsOld": true,
+    "candidates": [
+      {
+        "title": "No Stupid Questions",
+        "feedUrl": "https://feeds.simplecast.com/dfh_verV",
+        "itunesId": "1510056899",
+        "listennotesId": "e49bcb641c7a4b9b993fc55086cd634a",
+        "score": 1
+      },
+      {
+        "title": "No stupid questions",
+        "feedUrl": "https://anchor.fm/s/263e6ec8/podcast/rss",
+        "itunesId": "1525268196",
+        "listennotesId": "6b4042fff44046ed95a857e641d8b78b",
+        "score": 1
+      },
+      {
+        "title": "No Stupid Questions Show",
+        "feedUrl": "https://feed.podbean.com/www.nostupidquestionsshow.com/feed.xml",
+        "itunesId": "1460484041",
+        "listennotesId": "cf442343bb974a3d9d8cdff21e49a3a1",
+        "score": 1
+      },
+      {
+        "title": "No Stupid Questions with Susan Edmunds",
+        "feedUrl": "https://www.rnz.co.nz/podcasts/acast/no-stupid-questions.rss",
+        "itunesId": "1837805887",
+        "listennotesId": "b172c0a55e4143129b41c6cf949c9777",
+        "score": 0.84
+      },
+      {
+        "title": "Stupid Questions: There are no stupid Questions",
+        "feedUrl": "https://feeds.podcastle.ai/e91a8cff-4db7-4de1-873d-9211e93dc5fa.rss",
+        "itunesId": "1731292906",
+        "listennotesId": "c5b5785d17ff4f76b47034a745a54ae5",
+        "score": 0.84
+      },
+      {
+        "title": "No Stupid Questions",
+        "feedUrl": "https://anchor.fm/s/35c835b8/podcast/rss",
+        "itunesId": "1533718607",
+        "score": 1
+      }
+    ],
+    "steps": [
+      "iTunes search \"No Stupid Questions\"",
+      "ListenNotes search \"No Stupid Questions\"",
+      "check https://feeds.simplecast.com/dfh_verV"
+    ]
+  },
+  {
+    "podcast": "No Stupid Questions",
+    "slug": "no-stupid-questions",
+    "how": "old feed URL",
+    "input": "https://feeds.simplecast.com/dfh_verV",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://feeds.simplecast.com/dfh_verV",
+    "feedTitle": "No Stupid Questions",
+    "episodes": 344,
+    "latest": "2026-10-25T00:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://feeds.simplecast.com/dfh_verV"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/462763fd25314c158e469fb089686ede/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast 462763fd25314c158e469fb089686ede",
+      "ListenNotes says itunes_id 1611374685",
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "website + title",
+    "input": "http://therestispolitics.com/",
+    "verdict": "right",
+    "ok": true,
+    "route": "page",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "fetch page http://therestispolitics.com/",
+      "page \"Politics Podcast with Alastair Campbell and Rory Stewart | TRIP\": 0 feed link(s), 3 Apple link(s)",
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "title only",
+    "input": "The Rest Is Politics",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "iTunes search \"The Rest Is Politics\"",
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "old feed URL",
+    "input": "https://feeds.megaphone.fm/GLT9190936013",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "extra link",
+    "input": "https://podcasts.apple.com/gb/podcast/the-rest-is-politics/id1611374685",
+    "verdict": "right",
+    "ok": true,
+    "route": "apple",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "iTunes lookup 1611374685",
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "extra link",
+    "input": "https://www.listennotes.com/podcasts/the-rest-is-politics-goalhanger-GQCVYfw6LKv/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes+search",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "sameAsOld": true,
+    "candidates": [
+      {
+        "title": "The Rest Is Politics",
+        "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+        "itunesId": "1611374685",
+        "listennotesId": "462763fd25314c158e469fb089686ede",
+        "score": 0.85
+      },
+      {
+        "title": "The Rest Is Politics: US",
+        "feedUrl": "https://feeds.megaphone.fm/GLT5336643697",
+        "itunesId": "1743030473",
+        "listennotesId": "d4e9f921b78a43c1938cada6c67df1d3",
+        "score": 0.75
+      },
+      {
+        "title": "The Rest Is Politics: Leading",
+        "feedUrl": "https://feeds.megaphone.fm/GLT9029505120",
+        "itunesId": "1665265193",
+        "listennotesId": "86f1abaa5a5d49fbaa9227edf7127dfe",
+        "score": 0.75
+      },
+      {
+        "title": "The Rest Is Classified",
+        "feedUrl": "https://feeds.megaphone.fm/therestisclassified",
+        "itunesId": "1780384916",
+        "score": 0.57
+      },
+      {
+        "title": "The Rest Is Money",
+        "feedUrl": "https://feeds.megaphone.fm/therestismoney",
+        "itunesId": "1703785141",
+        "score": 0.57
+      },
+      {
+        "title": "The Rest Is History",
+        "feedUrl": "https://feeds.megaphone.fm/GLT4787413333",
+        "itunesId": "1537788786",
+        "score": 0.57
+      }
+    ],
+    "steps": [
+      "ListenNotes slug, title \"the rest is politics goalhanger\"",
+      "iTunes search \"the rest is politics goalhanger\"",
+      "ListenNotes search \"the rest is politics goalhanger\"",
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "The Rest Is Politics",
+    "slug": "the-rest-is-politics",
+    "how": "extra link",
+    "input": "https://www.listennotes.com/e/39102860719e494ab8b0878a9b555098/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9190936013",
+    "feedTitle": "The Rest Is Politics",
+    "episodes": 626,
+    "latest": "2026-10-22T23:05:00.000Z",
+    "episode": {
+      "title": "Kim Leadbeater, MP: My Sister's Murder and Why I Never Wanted To Go Into Politics",
+      "guid": "939534dc-ce36-11f1-a373-4b4e0698121a",
+      "listennotesId": "39102860719e494ab8b0878a9b555098"
+    },
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes episode 39102860719e494ab8b0878a9b555098",
+      "ListenNotes says itunes_id 1611374685",
+      "check https://feeds.megaphone.fm/GLT9190936013"
+    ]
+  },
+  {
+    "podcast": "Start the Week",
+    "slug": "start-the-week",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/1948ba1c04b84815929ed5c92d47a6cf/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "feedTitle": "Start the Week",
+    "episodes": 661,
+    "latest": "2026-10-19T09:15:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast 1948ba1c04b84815929ed5c92d47a6cf",
+      "ListenNotes says itunes_id 131131620",
+      "check https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+    ]
+  },
+  {
+    "podcast": "Start the Week",
+    "slug": "start-the-week",
+    "how": "website + title",
+    "input": "http://www.bbc.co.uk/programmes/b006r9xr",
+    "verdict": "right",
+    "ok": true,
+    "route": "bbc",
+    "feedUrl": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "feedTitle": "Start the Week",
+    "episodes": 661,
+    "latest": "2026-10-19T09:15:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "BBC programme b006r9xr",
+      "brand b006r9xr: has a podcast feed",
+      "check https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+    ]
+  },
+  {
+    "podcast": "Start the Week",
+    "slug": "start-the-week",
+    "how": "title only",
+    "input": "Start the Week",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "feedTitle": "Start the Week",
+    "episodes": 661,
+    "latest": "2026-10-19T09:15:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "iTunes search \"Start the Week\"",
+      "check https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+    ]
+  },
+  {
+    "podcast": "Start the Week",
+    "slug": "start-the-week",
+    "how": "old feed URL",
+    "input": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "feedTitle": "Start the Week",
+    "episodes": 661,
+    "latest": "2026-10-19T09:15:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+    ]
+  },
+  {
+    "podcast": "Start the Week",
+    "slug": "start-the-week",
+    "how": "extra link",
+    "input": "https://www.bbc.co.uk/sounds/brand/b006r9xr",
+    "verdict": "right",
+    "ok": true,
+    "route": "bbc",
+    "feedUrl": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "feedTitle": "Start the Week",
+    "episodes": 661,
+    "latest": "2026-10-19T09:15:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "BBC programme b006r9xr",
+      "brand b006r9xr: has a podcast feed",
+      "check https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+    ]
+  },
+  {
+    "podcast": "Start the Week",
+    "slug": "start-the-week",
+    "how": "extra link",
+    "input": "https://www.bbc.co.uk/sounds/play/m00331n6",
+    "verdict": "right",
+    "ok": true,
+    "route": "bbc",
+    "feedUrl": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "feedTitle": "Start the Week",
+    "episodes": 661,
+    "latest": "2026-10-19T09:15:00.000Z",
+    "episode": {
+      "title": "Napoleon’s marshals and President Trump’s civil servants",
+      "pid": "m00331n6"
+    },
+    "sameAsOld": true,
+    "steps": [
+      "BBC programme m00331n6",
+      "brand b006r9xr: has a podcast feed",
+      "check https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+    ]
+  },
+  {
+    "podcast": "Freakonomics Radio",
+    "slug": "freakonomics-radio",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/61eb6cf4b84d493b8ad512e01f72e2ef/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feeds.simplecast.com/Y8lFbOT4",
+    "feedTitle": "Freakonomics Radio",
+    "episodes": 944,
+    "latest": "2026-10-23T10:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast 61eb6cf4b84d493b8ad512e01f72e2ef",
+      "ListenNotes says itunes_id 354668519",
+      "check https://feeds.simplecast.com/Y8lFbOT4"
+    ]
+  },
+  {
+    "podcast": "Freakonomics Radio",
+    "slug": "freakonomics-radio",
+    "how": "website + title",
+    "input": "https://freakonomics.com",
+    "verdict": "right",
+    "ok": true,
+    "route": "page",
+    "feedUrl": "https://feeds.simplecast.com/Y8lFbOT4",
+    "feedTitle": "Freakonomics Radio",
+    "episodes": 944,
+    "latest": "2026-10-23T10:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "fetch page https://freakonomics.com",
+      "page \"Freakonomics\": 0 feed link(s), 5 Apple link(s)",
+      "check https://feeds.simplecast.com/Y8lFbOT4"
+    ]
+  },
+  {
+    "podcast": "Freakonomics Radio",
+    "slug": "freakonomics-radio",
+    "how": "title only",
+    "input": "Freakonomics Radio",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://feeds.simplecast.com/Y8lFbOT4",
+    "feedTitle": "Freakonomics Radio",
+    "episodes": 944,
+    "latest": "2026-10-23T10:00:00.000Z",
+    "sameAsOld": true,
+    "candidates": [
+      {
+        "title": "Freakonomics Radio",
+        "feedUrl": "https://feeds.simplecast.com/Y8lFbOT4",
+        "itunesId": "354668519",
+        "listennotesId": "61eb6cf4b84d493b8ad512e01f72e2ef",
+        "score": 1
+      },
+      {
+        "title": "The Freakonomics Radio Book Club",
+        "feedUrl": "https://feeds.simplecast.com/KB3PwEoc",
+        "itunesId": "1569077312",
+        "listennotesId": "1cec0896187947f0ba63b6730e7c89e1",
+        "score": 0.73
+      },
+      {
+        "title": "引力電台 Freakonomics Radio",
+        "feedUrl": "https://feed.firstory.me/rss/user/cl4h5i4w8000101y4ag534a4j",
+        "itunesId": "1644670479",
+        "listennotesId": "15dce065466648bba898fc7f3a3a0011",
+        "score": 1
+      },
+      {
+        "title": "Freakonomics, M.D.",
+        "feedUrl": "https://feeds.simplecast.com/Bx9_hnJH",
+        "itunesId": "1577556965",
+        "listennotesId": "8d39e395407a4022a715f67111df54ac",
+        "score": 0.73
+      },
+      {
+        "title": "No Stupid Questions",
+        "feedUrl": "https://feeds.simplecast.com/dfh_verV",
+        "itunesId": "1510056899",
+        "score": 0
+      },
+      {
+        "title": "Better in Person with Stephen Dubner",
+        "feedUrl": "https://feeds.simplecast.com/_puMcco6",
+        "itunesId": "6789198595",
+        "score": 0
+      }
+    ],
+    "steps": [
+      "iTunes search \"Freakonomics Radio\"",
+      "ListenNotes search \"Freakonomics Radio\"",
+      "check https://feeds.simplecast.com/Y8lFbOT4"
+    ]
+  },
+  {
+    "podcast": "Freakonomics Radio",
+    "slug": "freakonomics-radio",
+    "how": "old feed URL",
+    "input": "https://feeds.simplecast.com/Y8lFbOT4",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://feeds.simplecast.com/Y8lFbOT4",
+    "feedTitle": "Freakonomics Radio",
+    "episodes": 944,
+    "latest": "2026-10-23T10:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://feeds.simplecast.com/Y8lFbOT4"
+    ]
+  },
+  {
+    "podcast": "Leading",
+    "slug": "leading",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/86f1abaa5a5d49fbaa9227edf7127dfe/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9029505120",
+    "feedTitle": "The Rest Is Politics: Leading",
+    "episodes": 214,
+    "latest": "2026-10-18T23:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast 86f1abaa5a5d49fbaa9227edf7127dfe",
+      "ListenNotes says itunes_id 1665265193",
+      "check https://feeds.megaphone.fm/GLT9029505120"
+    ]
+  },
+  {
+    "podcast": "Leading",
+    "slug": "leading",
+    "how": "website + title",
+    "input": "http://therestispolitics.com/",
+    "verdict": "right",
+    "ok": true,
+    "route": "page+search",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9029505120",
+    "feedTitle": "The Rest Is Politics: Leading",
+    "episodes": 214,
+    "latest": "2026-10-18T23:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "fetch page http://therestispolitics.com/",
+      "page \"Politics Podcast with Alastair Campbell and Rory Stewart | TRIP\": 0 feed link(s), 3 Apple link(s)",
+      "3 podcasts on the page, none clearly \"Leading\"",
+      "iTunes search \"Leading\"",
+      "iTunes search \"The Rest Is Politics Leading\"",
+      "iTunes search \"The Rest Is Money Leading\"",
+      "check https://feeds.megaphone.fm/GLT9029505120"
+    ]
+  },
+  {
+    "podcast": "Leading",
+    "slug": "leading",
+    "how": "title only",
+    "input": "Leading",
+    "verdict": "ambiguous",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://leadingequity.libsyn.com/rss",
+    "finalUrl": "https://rss.libsyn.com/shows/127359/destinations/764065.xml",
+    "feedTitle": "Leading Equity",
+    "episodes": 100,
+    "latest": "2026-10-19T08:09:45.000Z",
+    "sameAsOld": false,
+    "candidates": [
+      {
+        "title": "Leading Equity",
+        "feedUrl": "https://leadingequity.libsyn.com/rss",
+        "itunesId": "1419821427",
+        "listennotesId": "68db3808273a4bc085babfa604ed8c4f",
+        "score": 0.8
+      },
+      {
+        "title": "Leading Saints Podcast",
+        "feedUrl": "https://feeds.podcastmirror.com/leading-saints-podcast",
+        "itunesId": "869421445",
+        "listennotesId": "7b1d9c8786474e6d82e2067781f5d1c6",
+        "score": 0.8
+      },
+      {
+        "title": "Leading Outward",
+        "feedUrl": "https://arbinger.com/podcasts/197937422094/rss.xml",
+        "itunesId": "1814700687",
+        "listennotesId": "c04c2ace4f1142c08322e74b4148d132",
+        "score": 0.8
+      },
+      {
+        "title": "Leading Learning Podcast",
+        "feedUrl": "https://feeds.redcircle.com/9d3628fb-ebeb-442f-ac74-f4ce5fc6df3d",
+        "itunesId": "1037455598",
+        "listennotesId": "54cfbe93a63647c1819b1f3b872ab9f2",
+        "score": 0.8
+      },
+      {
+        "title": "The Rest Is Politics: Leading",
+        "feedUrl": "https://feeds.megaphone.fm/GLT9029505120",
+        "itunesId": "1665265193",
+        "listennotesId": "86f1abaa5a5d49fbaa9227edf7127dfe",
+        "score": 0.7
+      },
+      {
+        "title": "Leading With Purpose",
+        "feedUrl": "https://toginet.com/rss/itunes/leadingwithpurpose",
+        "itunesId": "1004580375",
+        "score": 0.8
+      }
+    ],
+    "steps": [
+      "iTunes search \"Leading\"",
+      "ListenNotes search \"Leading\"",
+      "check https://leadingequity.libsyn.com/rss"
+    ]
+  },
+  {
+    "podcast": "Leading",
+    "slug": "leading",
+    "how": "old feed URL",
+    "input": "https://feeds.megaphone.fm/GLT9029505120",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://feeds.megaphone.fm/GLT9029505120",
+    "feedTitle": "The Rest Is Politics: Leading",
+    "episodes": 214,
+    "latest": "2026-10-18T23:00:00.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://feeds.megaphone.fm/GLT9029505120"
+    ]
+  },
+  {
+    "podcast": "Lex Fridman Podcast",
+    "slug": "lex-fridman-podcast",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/23e2be3c56e64dcdbb0cff3cedca4c95/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://lexfridman.com/feed/podcast/",
+    "feedTitle": "Lex Fridman Podcast",
+    "episodes": 502,
+    "latest": "2026-09-17T00:40:49.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast 23e2be3c56e64dcdbb0cff3cedca4c95",
+      "ListenNotes says itunes_id 1434243584",
+      "check https://lexfridman.com/feed/podcast/"
+    ]
+  },
+  {
+    "podcast": "Lex Fridman Podcast",
+    "slug": "lex-fridman-podcast",
+    "how": "website + title",
+    "input": "https://lexfridman.com/",
+    "verdict": "right",
+    "ok": true,
+    "route": "page+search",
+    "feedUrl": "https://lexfridman.com/feed/podcast/",
+    "feedTitle": "Lex Fridman Podcast",
+    "episodes": 502,
+    "latest": "2026-09-17T00:40:49.000Z",
+    "sameAsOld": true,
+    "candidates": [
+      {
+        "title": "Lex Fridman Podcast",
+        "feedUrl": "https://lexfridman.com/feed/podcast/",
+        "itunesId": "1434243584",
+        "listennotesId": "23e2be3c56e64dcdbb0cff3cedca4c95",
+        "score": 1
+      },
+      {
+        "title": "Lex Fridman Podcast | 5 minute podcast summaries",
+        "feedUrl": "https://www.spreaker.com/show/4920847/episodes/feed",
+        "itunesId": "1567129969",
+        "listennotesId": "14801510f0b4486498aa8abe680c3d1c",
+        "score": 0.76
+      },
+      {
+        "title": "Lex Fridman Podcast",
+        "feedUrl": "https://feeds.acast.com/public/shows/6a701c1688c5585c85e3a157",
+        "itunesId": "6797394108",
+        "listennotesId": "bb3580aa323249f391863608ecc350e8",
+        "score": 1
+      },
+      {
+        "title": "Lex Fridman Podcast",
+        "feedUrl": "https://www.spreaker.com/show/7373683/episodes/feed",
+        "itunesId": "6814008109",
+        "listennotesId": "eb0df7e39227407893aeab896592272c",
+        "score": 1
+      },
+      {
+        "title": "5 minute podcast summaries of: Tim Ferriss, Hidden Brain, Sam Harris, Lex Fridman, Jordan Peterson",
+        "feedUrl": "https://www.spreaker.com/show/4927606/episodes/feed",
+        "itunesId": "1569535757",
+        "score": 0.66
+      }
+    ],
+    "steps": [
+      "fetch page https://lexfridman.com/",
+      "page \"Lex Fridman\": 0 feed link(s), 0 Apple link(s)",
+      "no feed on the page",
+      "iTunes search \"Lex Fridman Podcast\"",
+      "iTunes search \"Lex Fridman Lex Fridman Podcast\"",
+      "ListenNotes search \"Lex Fridman Podcast\"",
+      "check https://lexfridman.com/feed/podcast/"
+    ]
+  },
+  {
+    "podcast": "Lex Fridman Podcast",
+    "slug": "lex-fridman-podcast",
+    "how": "title only",
+    "input": "Lex Fridman Podcast",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://lexfridman.com/feed/podcast/",
+    "feedTitle": "Lex Fridman Podcast",
+    "episodes": 502,
+    "latest": "2026-09-17T00:40:49.000Z",
+    "sameAsOld": true,
+    "candidates": [
+      {
+        "title": "Lex Fridman Podcast",
+        "feedUrl": "https://lexfridman.com/feed/podcast/",
+        "itunesId": "1434243584",
+        "listennotesId": "23e2be3c56e64dcdbb0cff3cedca4c95",
+        "score": 1
+      },
+      {
+        "title": "Lex Fridman Podcast | 5 minute podcast summaries",
+        "feedUrl": "https://www.spreaker.com/show/4920847/episodes/feed",
+        "itunesId": "1567129969",
+        "listennotesId": "14801510f0b4486498aa8abe680c3d1c",
+        "score": 0.76
+      },
+      {
+        "title": "Lex Fridman Podcast",
+        "feedUrl": "https://feeds.acast.com/public/shows/6a701c1688c5585c85e3a157",
+        "itunesId": "6797394108",
+        "listennotesId": "bb3580aa323249f391863608ecc350e8",
+        "score": 1
+      },
+      {
+        "title": "Lex Fridman Podcast",
+        "feedUrl": "https://www.spreaker.com/show/7373683/episodes/feed",
+        "itunesId": "6814008109",
+        "listennotesId": "eb0df7e39227407893aeab896592272c",
+        "score": 1
+      },
+      {
+        "title": "5 minute podcast summaries of: Tim Ferriss, Hidden Brain, Sam Harris, Lex Fridman, Jordan Peterson",
+        "feedUrl": "https://www.spreaker.com/show/4927606/episodes/feed",
+        "itunesId": "1569535757",
+        "score": 0.66
+      }
+    ],
+    "steps": [
+      "iTunes search \"Lex Fridman Podcast\"",
+      "ListenNotes search \"Lex Fridman Podcast\"",
+      "check https://lexfridman.com/feed/podcast/"
+    ]
+  },
+  {
+    "podcast": "Lex Fridman Podcast",
+    "slug": "lex-fridman-podcast",
+    "how": "old feed URL",
+    "input": "https://lexfridman.com/feed/podcast/",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://lexfridman.com/feed/podcast/",
+    "feedTitle": "Lex Fridman Podcast",
+    "episodes": 502,
+    "latest": "2026-09-17T00:40:49.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://lexfridman.com/feed/podcast/"
+    ]
+  },
+  {
+    "podcast": "Babbage from The Economist",
+    "slug": "babbage-from-the-economist",
+    "how": "ListenNotes link",
+    "input": "https://www.listennotes.com/c/43e615fb2f0646d3b02a58a751cd6bd1/",
+    "verdict": "right",
+    "ok": true,
+    "route": "listennotes",
+    "feedUrl": "https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "finalUrl": "https://access.acast.com/rss/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "feedTitle": "Babbage from The Economist",
+    "episodes": 11,
+    "latest": "2026-10-21T16:20:46.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "ListenNotes podcast 43e615fb2f0646d3b02a58a751cd6bd1",
+      "ListenNotes says itunes_id 508376907",
+      "check https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779"
+    ]
+  },
+  {
+    "podcast": "Babbage from The Economist",
+    "slug": "babbage-from-the-economist",
+    "how": "website + title",
+    "input": "https://play.acast.com/s/theeconomistbabbage/babbage-ledtime-1",
+    "verdict": "right",
+    "ok": true,
+    "route": "page",
+    "feedUrl": "https://feeds.acast.com/public/shows/theeconomistbabbage",
+    "finalUrl": "https://access.acast.com/rss/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "feedTitle": "Babbage from The Economist",
+    "episodes": 11,
+    "latest": "2026-10-21T16:20:46.000Z",
+    "sameAsOld": false,
+    "steps": [
+      "show page -> https://feeds.acast.com/public/shows/theeconomistbabbage: feed",
+      "check https://feeds.acast.com/public/shows/theeconomistbabbage"
+    ]
+  },
+  {
+    "podcast": "Babbage from The Economist",
+    "slug": "babbage-from-the-economist",
+    "how": "title only",
+    "input": "Babbage from The Economist",
+    "verdict": "right",
+    "ok": true,
+    "route": "search",
+    "feedUrl": "https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "finalUrl": "https://access.acast.com/rss/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "feedTitle": "Babbage from The Economist",
+    "episodes": 11,
+    "latest": "2026-10-21T16:20:46.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "iTunes search \"Babbage from The Economist\"",
+      "check https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779"
+    ]
+  },
+  {
+    "podcast": "Babbage from The Economist",
+    "slug": "babbage-from-the-economist",
+    "how": "old feed URL",
+    "input": "https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "verdict": "right",
+    "ok": true,
+    "route": "rss",
+    "feedUrl": "https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "finalUrl": "https://access.acast.com/rss/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "feedTitle": "Babbage from The Economist",
+    "episodes": 11,
+    "latest": "2026-10-21T16:20:46.000Z",
+    "sameAsOld": true,
+    "steps": [
+      "check https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779"
+    ]
+  }
+]

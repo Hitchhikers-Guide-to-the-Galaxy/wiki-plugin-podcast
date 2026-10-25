@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "planet-critical",
+    "title": "Planet: Critical",
+    "listennotesId": "190eb24695f140b7aac85a7c6c135ddd",
+    "oldRss": "https://feeds.simplecast.com/LDNGIWOE",
+    "website": "https://www.planetcritical.com/podcast",
+    "page": "https://podcast.anarchive.earth/view/planet-critical",
+    "extra": [],
+    "feed": "https://feed.podbean.com/planetcritical/feed.xml"
+  },
+  {
+    "slug": "no-stupid-questions",
+    "title": "No Stupid Questions",
+    "listennotesId": "e49bcb641c7a4b9b993fc55086cd634a",
+    "oldRss": "https://feeds.simplecast.com/dfh_verV",
+    "website": "https://freakonomics.com",
+    "page": "https://podcast.anarchive.earth/view/no-stupid-questions",
+    "extra": [],
+    "feed": "https://feeds.simplecast.com/dfh_verV"
+  },
+  {
+    "slug": "the-rest-is-politics",
+    "title": "The Rest Is Politics",
+    "listennotesId": "462763fd25314c158e469fb089686ede",
+    "oldRss": "https://feeds.megaphone.fm/GLT9190936013",
+    "website": "http://therestispolitics.com/",
+    "page": "https://podcast.anarchive.earth/view/the-rest-is-politics",
+    "extra": [
+      "https://podcasts.apple.com/gb/podcast/the-rest-is-politics/id1611374685",
+      "https://www.listennotes.com/podcasts/the-rest-is-politics-goalhanger-GQCVYfw6LKv/",
+      "https://www.listennotes.com/e/39102860719e494ab8b0878a9b555098/"
+    ],
+    "feed": "https://feeds.megaphone.fm/GLT9190936013"
+  },
+  {
+    "slug": "start-the-week",
+    "title": "Start the Week",
+    "listennotesId": "1948ba1c04b84815929ed5c92d47a6cf",
+    "oldRss": "https://podcasts.files.bbci.co.uk/b006r9xr.rss",
+    "website": "http://www.bbc.co.uk/programmes/b006r9xr",
+    "page": "https://podcast.anarchive.earth/view/start-the-week",
+    "extra": [
+      "https://www.bbc.co.uk/sounds/brand/b006r9xr",
+      "https://www.bbc.co.uk/sounds/play/m00331n6"
+    ],
+    "feed": "https://podcasts.files.bbci.co.uk/b006r9xr.rss"
+  },
+  {
+    "slug": "freakonomics-radio",
+    "title": "Freakonomics Radio",
+    "listennotesId": "61eb6cf4b84d493b8ad512e01f72e2ef",
+    "oldRss": "https://feeds.simplecast.com/Y8lFbOT4",
+    "website": "https://freakonomics.com",
+    "page": "https://podcast.anarchive.earth/view/freakonomics-radio",
+    "extra": [],
+    "feed": "https://feeds.simplecast.com/Y8lFbOT4"
+  },
+  {
+    "slug": "leading",
+    "title": "Leading",
+    "listennotesId": "86f1abaa5a5d49fbaa9227edf7127dfe",
+    "oldRss": "https://feeds.megaphone.fm/GLT9029505120",
+    "website": "http://therestispolitics.com/",
+    "page": "https://podcast.anarchive.earth/view/leading",
+    "extra": [],
+    "feed": "https://feeds.megaphone.fm/GLT9029505120"
+  },
+  {
+    "slug": "lex-fridman-podcast",
+    "title": "Lex Fridman Podcast",
+    "listennotesId": "23e2be3c56e64dcdbb0cff3cedca4c95",
+    "oldRss": "https://lexfridman.com/feed/podcast/",
+    "website": "https://lexfridman.com/",
+    "page": "https://podcast.anarchive.earth/view/lex-fridman-podcast",
+    "extra": [],
+    "feed": "https://lexfridman.com/feed/podcast/"
+  },
+  {
+    "slug": "babbage-from-the-economist",
+    "title": "Babbage from The Economist",
+    "listennotesId": "43e615fb2f0646d3b02a58a751cd6bd1",
+    "oldRss": "https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "website": "https://play.acast.com/s/theeconomistbabbage/babbage-ledtime-1",
+    "page": "https://podcast.anarchive.earth/view/babbage-from-the-economist",
+    "extra": [],
+    "feed": "https://feeds.acast.com/public/shows/e421d786-ec36-4148-aa99-7a3b2928a779",
+    "feedFinal": "https://access.acast.com/rss/e421d786-ec36-4148-aa99-7a3b2928a779"
+  }
+]
